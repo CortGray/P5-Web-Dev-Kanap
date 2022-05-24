@@ -18,6 +18,7 @@ function createItem(product) {
   let productArticle = document.createElement('article');
   productItem.appendChild(productArticle);
   let productImage = document.createElement('img');
+  productImage.innerHTML = '<img src="'+[product.imageUrl]+'" alt="'+[product.altTxt]+'">';
   productArticle.appendChild(productImage);
   let productName = document.createElement('h3');
   productName.innerHTML = '<h3 class="productName">'+[product.name]+'</h3>';
