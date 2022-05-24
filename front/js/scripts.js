@@ -2,10 +2,10 @@ const items = document.getElementById(items);
 
 fetch('http://localhost:3000/api/products')
 .then(data => {
-    return data.json();
+    let products = data.json();
 })
-.then(data => {
-    for (let product of data) {
+.then(products => {
+    for (let product of products) {
         let productItem = document.createElement('a');
         productItem.innerHTML = '<a href="./product.html?id='+[product.id]+'">';
         items.appendChild(productItem);
