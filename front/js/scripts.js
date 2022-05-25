@@ -1,5 +1,3 @@
-const items = document.getElementById(items);
-
 fetch('http://localhost:3000/api/products')
 .then(data => data.json())
 .then(data => createItems(data));
@@ -13,17 +11,24 @@ function createItems(array) {
 
 function createItem(product) {
   let productItem = document.createElement('a');
-  productItem.innerHTML = '<a href="./product.html?id='+[product.id]+'">';
+  productItem.setAttribute('href', './product.html?id='+[product._id]+'')
   items.appendChild(productItem);
+  
   let productArticle = document.createElement('article');
   productItem.appendChild(productArticle);
+  
   let productImage = document.createElement('img');
-  productImage.innerHTML = '<img src="'+[product.imageUrl]+'" alt="'+[product.altTxt]+'">';
+  productImage.setAttribute('src', ''+[product.imageUrl]+'');
+  productImage.setAttribute('alt', ''+[product.altTxt]+'');
   productArticle.appendChild(productImage);
+  
   let productName = document.createElement('h3');
-  productName.innerHTML = '<h3 class="productName">'+[product.name]+'</h3>';
+  productName.innerHTML = [product.name];
+  productName.classList.add('productName');
   productArticle.appendChild(productName);
+  
   let productDetails = document.createElement('p');
-  productDetails.innerHTML = '<p class="productDescription">'+[product.description]+'</p>'
+  productDetails.innerHTML = [product.description];
+  productDetails.classList.add('productDescription');
   productArticle.appendChild(productDetails);
 }
