@@ -2,6 +2,8 @@ fetch('http://localhost:3000/api/products')
 .then(data => data.json())
 .then(data => createItems(data));
 
+const items = document.getElementById('items');
+
 function createItems(array) {
   const length = array.length;
   for (let i in array){
