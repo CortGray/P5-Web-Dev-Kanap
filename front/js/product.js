@@ -39,6 +39,6 @@ cartButton.addEventListener('click', () => {
 })
 
 function addToCart(item) {
-    let addedProduct = {id: pageId, color: optionColor.value, quantity: optionQuantity.value};
+    const addedProduct = {id: pageId, color: optionColor.value, quantity: optionQuantity.value};
     localStorage.setItem(addedProduct, JSON.stringify(addedProduct));
 }
