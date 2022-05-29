@@ -5,11 +5,14 @@ fetch('http://localhost:3000/api/products/'+ pageId)
 .then(data => data.json())
 .then(data => addItem(data));
 
-let imgDiv = document.getElementsByClassName('item__img')[0];
-let productTitle = document.getElementById('title');
-let productPrice = document.getElementById('price');
-let productDescription = document.getElementById('description');
-let productColorOptions = document.getElementById('colors');
+const imgDiv = document.getElementsByClassName('item__img')[0];
+const productTitle = document.getElementById('title');
+const productPrice = document.getElementById('price');
+const productDescription = document.getElementById('description');
+const productColorOptions = document.getElementById('colors');
+const cartButton = document.getElementById('addToCart');
+const optionColor = document.getElementById('colors');
+const optionQuantity = document.getElementById('quantity');
 
 function addItem(product) {
     let productImg = document.createElement('img');
@@ -29,4 +32,13 @@ function colorOptions(colors) {
         colorOpt.textContent = color;
         productColorOptions.appendChild(colorOpt);
     }
+}
+
+cartButton.addEventListener('click', () => {
+    addToCart(pageId);
+})
+
+function addToCart(item) {
+    let addedProduct = {id: pageId, color: optionColor.value, quantity: optionQuantity.value};
+    localStorage.setItem(addedProduct, JSON.stringify(addedProduct));
 }
