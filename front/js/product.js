@@ -14,6 +14,9 @@ const cartButton = document.getElementById('addToCart');
 const optionColor = document.getElementById('colors');
 const optionQuantity = document.getElementById('quantity');
 
+let productArray = [];
+productArray = JSON.parse(localStorage.getItem('session')) || [];
+
 function addItem(product) {
     let productImg = document.createElement('img');
     productImg.setAttribute('src', ''+[product.imageUrl]+'');
@@ -39,6 +42,6 @@ cartButton.addEventListener('click', () => {
 })
 
 function addToCart(item) {
-    const addedProduct = {id: pageId, color: optionColor.value, quantity: optionQuantity.value};
-    localStorage.setItem(addedProduct, JSON.stringify(addedProduct));
+    productArray.push({id: pageId, color: optionColor.value, quantity: optionQuantity.value});
+    localStorage.setItem('session', JSON.stringify(productArray));
 }
