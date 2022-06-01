@@ -13,7 +13,7 @@ const productColorOptions = document.getElementById('colors');
 const cartButton = document.getElementById('addToCart');
 const optionColor = document.getElementById('colors');
 const optionQuantity = document.getElementById('quantity');
-
+let productobj  = {};
 let productArray = [];
 productArray = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -26,6 +26,7 @@ function addItem(product) {
     productPrice.textContent = product.price;
     productDescription.textContent = product.description;
     colorOptions(product.colors);
+    productobj = product;
 }
 
 function colorOptions(colors) {
@@ -42,11 +43,19 @@ cartButton.addEventListener('click', () => {
 })
 
 function addToCart(item) {
-    if (productArray.includes([pageId]) && productArray.includes([optionColor.value])) {
-        let i = productArray.indexOf([pageId]) && productArray.indexOf([optionColor.value]);
-        [i].quantity = +[optionQuantity.value];
+    debugger
+   let index =  productArray.findIndex(pro => pro.id == pageId && pro.color== optionColor.value)
+
+   console.log(index);  // index pr -1
+
+    if (index > -1) {
+        let i = productArray[index];
+        let old =  parseInt( i.quantity) ;
+        old += parseInt( optionQuantity.value);
+        i.quantity = old;
+        localStorage.setItem('cart', JSON.stringify(productArray));
     } else {
-        productArray.push({id: pageId, color: optionColor.value, quantity: optionQuantity.value});
+        productArray.push({...productobj, color: optionColor.value, quantity: optionQuantity.value});
         localStorage.setItem('cart', JSON.stringify(productArray));
     }
 }
