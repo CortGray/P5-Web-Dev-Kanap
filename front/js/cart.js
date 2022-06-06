@@ -1,14 +1,17 @@
 const cartList = document.getElementById('cart__items');
+let totalQuantity = document.getElementById('totalQuantity');
+let totalPrice = document.getElementById('totalPrice');
 let cartItems = JSON.parse(localStorage.getItem('cart'));
-let cartTotal = 0;
+totalPrice = 0;
+totalQuantity = 0;
 
-function createCartList(cartItems) {
-    const length = cartItems.length;
-    for (let i in cartItems) {
-        let product = cartItems[i];
+createCartList(cartItems);
+
+function createCartList(array) {
+    const length = array.length;
+    for (let i in array) {
+        let product = array[i];
         createCartItem(product);
-        let price = parseInt(product.price);
-        cartTotal += price;
     }
 }
 
@@ -47,7 +50,7 @@ function createCartItem(product) {
     let cartPrice = document.createElement('p');
     cartPrice.innerHTML = [product.price];
     cartContentDesc.appendChild(cartPrice);
-    cartTotal += cartItemPrice;
+    totalPrice += parseInt(product.price);
 
     let cartContentSett = document.createElement('div');
     cartContentSett.classList.add('cart__item__content__settings');
@@ -69,6 +72,7 @@ function createCartItem(product) {
     cartQtyInput.setAttribute('max', '100');
     cartQtyInput.setAttribute('value', ''+[product.quantity]+'');
     cartSettingsQty.appendChild(cartQtyInput);
+    totalQuantity += parseInt(product.quantity);
 
     let cartSettDelete = document.createElement('div');
     cartSettDelete.classList.add('cart__item__content__settings__delete');
