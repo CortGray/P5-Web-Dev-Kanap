@@ -2,11 +2,21 @@ const cartList = document.getElementById('cart__items');
 let cartItems = JSON.parse(localStorage.getItem('cart'));
 let cartTotal = 0;
 
+function createCartList(cartItems) {
+    const length = cartItems.length;
+    for (let i in cartItems) {
+        let product = cartItems[i];
+        createCartItem(product);
+        let price = parseInt(product.price);
+        cartTotal += price;
+    }
+}
+
 function createCartItem(product) {
     let cartArticle = document.createElement('article');
     cartArticle.classList.add('cart__item');
-    cartArticle.setAttribute('data-id', ''+[cartItemId]+'');
-    cartArticle.setAttribute('data-color', ''+[cartItemColor]+'');
+    cartArticle.setAttribute('data-id', ''+[product._id]+'');
+    cartArticle.setAttribute('data-color', ''+[product.color]+'');
     cartList.appendChild(cartArticle);
 
     let cartDivImg = document.createElement('div');
@@ -14,8 +24,8 @@ function createCartItem(product) {
     cartArticle.appendChild(cartDivImg);
 
     let cartImg = document.createElement('img');
-    cartImg.setAttribute('src', ''+[cartItemImg]+'');
-    cartImg.setAttribute('alt', ''+[cartItemAlt]+'');
+    cartImg.setAttribute('src', ''+[product.imageUrl]+'');
+    cartImg.setAttribute('alt', ''+[product.altTxt]+'');
     cartDivImg.appendChild(cartImg);
 
     let cartDivContent = document.createElement('div');
@@ -27,16 +37,17 @@ function createCartItem(product) {
     cartDivContent.appendChild(cartContentDesc);
 
     let cartName = document.createElement('h2');
-    cartName.innerHTML = [cartItemName];
+    cartName.innerHTML = [product.name];
     cartContentDesc.appendChild(cartName);
 
     let cartColor = document.createElement('p');
-    cartColor.innerHTML = [cartItemColor];
+    cartColor.innerHTML = [product.color];
     cartContentDesc.appendChild(cartColor);
 
     let cartPrice = document.createElement('p');
-    cartPrice.innerHTML = [cartItemPrice];
+    cartPrice.innerHTML = [product.price];
     cartContentDesc.appendChild(cartPrice);
+    cartTotal += cartItemPrice;
 
     let cartContentSett = document.createElement('div');
     cartContentSett.classList.add('cart__item__content__settings');
@@ -56,7 +67,7 @@ function createCartItem(product) {
     cartQtyInput.setAttribute('name', 'itemQuantity');
     cartQtyInput.setAttribute('min', '1');
     cartQtyInput.setAttribute('max', '100');
-    cartQtyInput.setAttribute('value', ''+[cartItemQuantity]+'');
+    cartQtyInput.setAttribute('value', ''+[product.quantity]+'');
     cartSettingsQty.appendChild(cartQtyInput);
 
     let cartSettDelete = document.createElement('div');
