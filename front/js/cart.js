@@ -60,5 +60,11 @@ function createCartItem(product) {
     cartSettingsQty.appendChild(cartQtyInput);
 
     let cartSettDelete = document.createElement('div');
-    cartSEt
+    cartSettDelete.classList.add('cart__item__content__settings__delete');
+    cartContentSett.appendChild(cartSettDelete);
+
+    let cartDelete = document.createElement('p');
+    cartDelete.classList.add('deleteItem');
+    cartDelete.textContent = 'Delete';
+    cartSettDelete.appendChild(cartDelete);
 }
