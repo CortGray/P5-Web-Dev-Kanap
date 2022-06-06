@@ -2,8 +2,8 @@ const cartList = document.getElementById('cart__items');
 let totalQuantity = document.getElementById('totalQuantity');
 let totalPrice = document.getElementById('totalPrice');
 let cartItems = JSON.parse(localStorage.getItem('cart'));
-totalPrice = 0;
-totalQuantity = 0;
+let cartTotalPrice = 0;
+let cartTotalQuantity = 0;
 
 createCartList(cartItems);
 
@@ -12,6 +12,8 @@ function createCartList(array) {
     for (let i in array) {
         let product = array[i];
         createCartItem(product);
+        totalQuantity.innerHTML = [cartTotalQuantity];
+        totalPrice.innerHTML = [cartTotalPrice];
     }
 }
 
@@ -50,7 +52,7 @@ function createCartItem(product) {
     let cartPrice = document.createElement('p');
     cartPrice.innerHTML = [product.price];
     cartContentDesc.appendChild(cartPrice);
-    totalPrice += parseInt(product.price);
+    cartTotalPrice += parseInt(product.price);
 
     let cartContentSett = document.createElement('div');
     cartContentSett.classList.add('cart__item__content__settings');
@@ -72,7 +74,7 @@ function createCartItem(product) {
     cartQtyInput.setAttribute('max', '100');
     cartQtyInput.setAttribute('value', ''+[product.quantity]+'');
     cartSettingsQty.appendChild(cartQtyInput);
-    totalQuantity += parseInt(product.quantity);
+    cartTotalQuantity += parseInt(product.quantity);
 
     let cartSettDelete = document.createElement('div');
     cartSettDelete.classList.add('cart__item__content__settings__delete');
