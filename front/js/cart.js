@@ -1,7 +1,13 @@
 const cartList = document.getElementById('cart__items');
 let totalQuantity = document.getElementById('totalQuantity');
 let totalPrice = document.getElementById('totalPrice');
+let inputFirstName = document.getElementById('firstName');
+let inputLast
+let inputEmail = document.getElementById('email');
 let cartItems = JSON.parse(localStorage.getItem('cart'));
+
+let email = inputEmail.value;
+
 let cartTotalPrice = 0;
 let cartTotalQuantity = 0;
 
