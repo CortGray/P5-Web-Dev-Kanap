@@ -43,9 +43,7 @@ cartButton.addEventListener('click', () => {
 })
 
 function addToCart(item) {
-   let index =  productArray.findIndex(pro => pro._id == pageId && pro.color== optionColor.value)
-
-   console.log(index);  // index pr -1
+   let index =  productArray.findIndex(pro => pro._id == pageId && pro.color== optionColor.value);
 
     if (index > -1) {
         let i = productArray[index];

@@ -17,6 +17,12 @@ function createCartList(array) {
     }
 }
 
+function changeQuantity(element) {
+    let elementParent = element.closest('article');
+    let cartIndex = cartItems.findIndex(pro => pro._id == elementParent.dataset.id && pro.color == elementParent.dataset.color);
+    cartIndex.quantity = element.value;
+}
+
 function createCartItem(product) {
     let cartArticle = document.createElement('article');
     cartArticle.classList.add('cart__item');
@@ -75,6 +81,7 @@ function createCartItem(product) {
     cartQtyInput.setAttribute('value', ''+[product.quantity]+'');
     cartSettingsQty.appendChild(cartQtyInput);
     cartTotalQuantity += parseInt(product.quantity);
+    cartQtyInput.addEventListener('change', changeQuantity(cartQtyInput));
 
     let cartSettDelete = document.createElement('div');
     cartSettDelete.classList.add('cart__item__content__settings__delete');
