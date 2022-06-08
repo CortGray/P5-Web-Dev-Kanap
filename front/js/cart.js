@@ -1,12 +1,20 @@
 const cartList = document.getElementById('cart__items');
 let totalQuantity = document.getElementById('totalQuantity');
 let totalPrice = document.getElementById('totalPrice');
-let inputFirstName = document.getElementById('firstName');
-let inputLast
-let inputEmail = document.getElementById('email');
-let cartItems = JSON.parse(localStorage.getItem('cart'));
 
-let email = inputEmail.value;
+let inputFirstName = document.getElementById('firstName');
+let inputFirstErr = document.getElementById('firstNameErrorMsg');
+let inputLastName = document.getElementById('lastName');
+let inputLastErr = document.getElementById('lastNameErrorMsg');
+let inputAddress = document.getElementById('address');
+let inputAddressErr = document.getElementById('addressErrorMsg');
+let inputCity = document.getElementById('city');
+let inputCityErr = document.getElementById('cityErrorMsg');
+let inputEmail = document.getElementById('email');
+let inputEmailErr = document.getElementById('emailErrorMsg');
+let inputButton = document.getElementById('order');
+
+let cartItems = JSON.parse(localStorage.getItem('cart'));
 
 let cartTotalPrice = 0;
 let cartTotalQuantity = 0;
@@ -116,3 +124,7 @@ function createCartItem(product) {
         elementParent.remove();
     });
 }
+
+const regexStandard = /([A-Z])([a-z]+)/;
+const regexAddress = ;
+const regexEmail = ;
