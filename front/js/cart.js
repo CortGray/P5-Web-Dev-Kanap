@@ -130,15 +130,32 @@ function createCartItem(product) {
 }
 
 function validateStandard(input) {
-    if (regexStandard.test(element)) {
+    if (regexStandard.test(input)) {
         console.log("It works!");
         // add to options //
     } else {
         [input]Err = "Invalid, please try again.";
-        validateStandard(element);
+        validateStandard(input);
     }
 }
 
-inputFirstName.addEventListener('change', function() {
-    validateStandard(inputFirstName);
-});
+function validateAddress(input) {
+    if (regexAddress.test(input)) {
+        console.log("Address works!");
+        //add to options//
+    } else {
+        [input]Err = "Invalid, please try again.";
+        validateAddress(input);
+    }
+}
+
+function validateEmail(input) {
+    if (regexEmail.test(input)) {
+        console.log("Email works!");
+        //add to options//
+    } else {
+        [input]Err = "Invalid, please try again.";
+    }
+}
+
+validateStandard(inputFirstName);
