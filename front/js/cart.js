@@ -3,9 +3,9 @@ let totalQuantity = document.getElementById('totalQuantity');
 let totalPrice = document.getElementById('totalPrice');
 
 let inputFirstName = document.getElementById('firstName');
-let inputFirstErr = document.getElementById('firstNameErrorMsg');
+let inputFirstNameErr = document.getElementById('firstNameErrorMsg');
 let inputLastName = document.getElementById('lastName');
-let inputLastErr = document.getElementById('lastNameErrorMsg');
+let inputLastNameErr = document.getElementById('lastNameErrorMsg');
 let inputAddress = document.getElementById('address');
 let inputAddressErr = document.getElementById('addressErrorMsg');
 let inputCity = document.getElementById('city');
@@ -13,6 +13,10 @@ let inputCityErr = document.getElementById('cityErrorMsg');
 let inputEmail = document.getElementById('email');
 let inputEmailErr = document.getElementById('emailErrorMsg');
 let inputButton = document.getElementById('order');
+
+const regexStandard = /([A-Z])([a-z]+)/;
+const regexAddress = /(\d+)(\s\w+)+/;
+const regexEmail = /\S+@\S+\.\S+/;
 
 let cartItems = JSON.parse(localStorage.getItem('cart'));
 
@@ -125,6 +129,16 @@ function createCartItem(product) {
     });
 }
 
-const regexStandard = /([A-Z])([a-z]+)/;
-const regexAddress = ;
-const regexEmail = ;
+function validateStandard(input) {
+    if (regexStandard.test(element)) {
+        console.log("It works!");
+        // add to options //
+    } else {
+        [input]Err = "Invalid, please try again.";
+        validateStandard(element);
+    }
+}
+
+inputFirstName.addEventListener('change', function() {
+    validateStandard(inputFirstName);
+});
