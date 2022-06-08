@@ -82,11 +82,17 @@ function createCartItem(product) {
     cartQtyInput.setAttribute('value', ''+[product.quantity]+'');
     cartSettingsQty.appendChild(cartQtyInput);
     cartQtyInput.addEventListener('change', function () {
+        cartTotalQuantity -= parseInt(product.quantity);
+        cartTotalPrice -= parseInt(product.price * product.quantity);
         let elementParent = cartQtyInput.closest('article');
         let Index = cartItems.findIndex(pro => pro._id == elementParent.dataset.id && pro.color == elementParent.dataset.color);
         let cartProduct = cartItems[Index];
         cartProduct.quantity = (cartQtyInput.value);
         localStorage.setItem('cart', JSON.stringify(cartItems));
+        cartTotalQuantity += parseInt(product.quantity);
+        cartTotalPrice += parseInt(product.price * product.quantity);
+        totalQuantity.innerHTML = [cartTotalQuantity];
+        totalPrice.innerHTML = [cartTotalPrice];
     });
 
     let cartSettDelete = document.createElement('div');
@@ -98,6 +104,10 @@ function createCartItem(product) {
     cartDelete.textContent = 'Delete';
     cartSettDelete.appendChild(cartDelete);
     cartDelete.addEventListener('click', function () {
+        cartTotalQuantity -= parseInt(product.quantity);
+        cartTotalPrice -= parseInt(product.price * product.quantity);
+        totalQuantity.innerHTML = [cartTotalQuantity];
+        totalPrice.innerHTML = [cartTotalPrice];
         let elementParent = cartDelete.closest('article');
         let Index = cartItems.findIndex(pro => pro._id == elementParent.dataset.id && pro.color == elementParent.dataset.color);
         let cartProduct = cartItems[Index];
