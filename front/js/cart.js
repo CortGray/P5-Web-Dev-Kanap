@@ -26,7 +26,6 @@ let cartTotalQuantity = 0;
 createCartList(cartItems);
 
 function createCartList(array) {
-    const length = array.length;
     for (let i in array) {
         let product = array[i];
         createCartItem(product);
@@ -172,4 +171,38 @@ inputEmail.addEventListener('change', function () {
     } else {
         inputEmailErr.textContent = "Invalid, please try again.";
     }   
+})
+
+inputButton.addEventListener('click', function ($event) {
+    $event.preventDefault();
+    let product = [];
+    for (let i in cartItems) {
+        let orderProduct = cartItems[i];
+        let item = {
+            id: orderProduct._id,
+            color: orderProduct.color,
+            quantity: orderProduct.quantity,
+        };
+        product.push(item);
+    }
+    console.log(product);
+    let contact = {
+        firstName: inputFirstName.value,
+        lastName: inputLastName.value,
+        address: inputAddress.value,
+        city: inputCity.value,
+        email: inputEmail.value,
+        product: product,
+    };
+    console.log(contact);
+    let order = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contact),
+    };
+    console.log(order);
+    fetch('http://localhost:3000/api/products/order', order)
+    .then(data => console.log(data));
 })
