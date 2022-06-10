@@ -175,34 +175,37 @@ inputEmail.addEventListener('change', function () {
 
 inputButton.addEventListener('click', function ($event) {
     $event.preventDefault();
-    let product = [];
+    let products = [];
     for (let i in cartItems) {
         let orderProduct = cartItems[i];
-        let item = {
-            id: orderProduct._id,
-            color: orderProduct.color,
-            quantity: orderProduct.quantity,
-        };
-        product.push(item);
+        products.push(orderProduct._id);
     }
-    console.log(product);
+    console.log(products);
     let contact = {
         firstName: inputFirstName.value,
         lastName: inputLastName.value,
         address: inputAddress.value,
         city: inputCity.value,
         email: inputEmail.value,
-        product: product,
     };
     console.log(contact);
     let order = {
+        contact,
+        products,
+    }
+    let postOrder = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(contact),
+        body: JSON.stringify(order),
     };
     console.log(order);
-    fetch('http://localhost:3000/api/products/order', order)
-    .then(data => console.log(data));
+    fetch('http://localhost:3000/api/products/order', postOrder)
+    .then(data => data.json())
+    .then(data => {
+        sessionStorage.setItem('orderId', data.orderId)
+        window.location.href = 'confirmation.html';
+    });
+    
 })
