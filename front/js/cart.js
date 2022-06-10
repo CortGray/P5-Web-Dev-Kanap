@@ -14,7 +14,7 @@ let inputEmail = document.getElementById('email');
 let inputEmailErr = document.getElementById('emailErrorMsg');
 let inputButton = document.getElementById('order');
 
-const regexStandard = /([A-Z])([a-z]+)/;
+const regexStandard = /[A-Z][a-z]+/;
 const regexAddress = /(\d+)(\s\w+)+/;
 const regexEmail = /\S+@\S+\.\S+/;
 
@@ -129,33 +129,47 @@ function createCartItem(product) {
     });
 }
 
-function validateStandard(input) {
-    if (regexStandard.test(input)) {
-        console.log("It works!");
-        // add to options //
+inputFirstName.addEventListener('change', function () {
+    let result = regexStandard.test(inputFirstName.value);
+    if (result) {
+        inputFirstNameErr.textContent = '';
     } else {
-        [input]Err = "Invalid, please try again.";
-        validateStandard(input);
-    }
-}
+        inputFirstNameErr.textContent = "Invalid, please try again.";
+    }    
+})
 
-function validateAddress(input) {
-    if (regexAddress.test(input)) {
-        console.log("Address works!");
-        //add to options//
+inputLastName.addEventListener('change', function () {
+    let result = regexStandard.test(inputLastName.value);
+    if (result) {
+        inputLastNameErr.textContent = '';
     } else {
-        [input]Err = "Invalid, please try again.";
-        validateAddress(input);
-    }
-}
+        inputLastNameErr.textContent = "Invalid, please try again.";
+    }   
+})
 
-function validateEmail(input) {
-    if (regexEmail.test(input)) {
-        console.log("Email works!");
-        //add to options//
+inputAddress.addEventListener('change', function () {
+    let result = regexAddress.test(inputAddress.value);
+    if (result) {
+        inputAddressErr.textContent = '';
     } else {
-        [input]Err = "Invalid, please try again.";
-    }
-}
+        inputAddressErr.textContent = "Invalid, please try again.";
+    }   
+})
 
-validateStandard(inputFirstName);
+inputCity.addEventListener('change', function () {
+    let result = regexStandard.test(inputCity.value);
+    if (result) {
+        inputCityErr.textContent = '';
+    } else {
+        inputCityErr.textContent = "Invalid, please try again.";
+    }   
+})
+
+inputEmail.addEventListener('change', function () {
+    let result = regexEmail.test(inputEmail.value);
+    if (result) {
+        inputEmailErr.textContent = '';
+    } else {
+        inputEmailErr.textContent = "Invalid, please try again.";
+    }   
+})
