@@ -201,11 +201,28 @@ inputButton.addEventListener('click', function ($event) {
         body: JSON.stringify(order),
     };
     console.log(order);
-    fetch('http://localhost:3000/api/products/order', postOrder)
-    .then(data => data.json())
-    .then(data => {
-        sessionStorage.setItem('orderId', data.orderId)
-        window.location.href = 'confirmation.html';
-    });
-    
+    if (contact.firstName && contact.lastName && contact.address && contact.city && contact.email) {
+        fetch('http://localhost:3000/api/products/order', postOrder)
+        .then(data => data.json())
+        .then(data => {
+            sessionStorage.setItem('orderId', data.orderId)
+            window.location.href = 'confirmation.html';
+        });
+    } else {
+        if (!contact.firstName) {
+            inputFirstNameErr.textContent = "Invalid, please try again.";
+        }
+        if (!contact.lastName) {
+            inputLastNameErr.textContent = "Invalid, please try again.";
+        }
+        if (!contact.address) {
+            inputAddressErr.textContent = "Invalid, please try again.";
+        }
+        if (!contact.city) {
+            inputCityErr.textContent = "Invalid, please try again.";
+        }
+        if (!contact.email) {
+            inputEmailErr.textContent = "Invalid, please try again.";
+        }
+    }
 })
